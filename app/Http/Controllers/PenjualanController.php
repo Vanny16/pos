@@ -40,7 +40,7 @@ class PenjualanController extends Controller
                 return '<span class="label label-success">'. $member .'</spa>';
             })
             ->editColumn('diskon', function ($penjualan) {
-                return $penjualan->diskon . '%';
+                return  '₱ '. $penjualan->diskon ;
             })
             ->editColumn('kasir', function ($penjualan) {
                 return $penjualan->user->name ?? '';
