@@ -16,6 +16,7 @@
             <div class="box-header with-border">
                 <button onclick="addForm('{{ route('user.store') }}')" class="btn btn-success btn-flat"><i class="fa fa-plus-circle"></i> Add New System User</button>
             </div>
+
             <div class="box-body table-responsive">
                 <table class="table table-stiped table-bordered table-hover">
                     <thead>
@@ -68,6 +69,7 @@
             }
         });
     });
+
 
     function addForm(url) {
         $('#modal-form').modal('show');

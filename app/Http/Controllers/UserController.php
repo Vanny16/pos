@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
+
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -11,6 +13,26 @@ class UserController extends Controller
     public function index()
     {
         return view('user.index');
+    }
+
+    public function view_roles()
+    {
+        $roles = Role::get();
+        // dd($roles);
+        return view('role.index', compact('roles'));
+    }
+
+    public function update_role(Request $request)
+    {
+        $role_id = $request->input('role_id');
+        $updatedAttributes = [
+            'role_name' => $request->input('role_name'),
+        ];
+
+        $role = Role::findOrFail($role_id);
+        $role->update($updatedAttributes);
+
+        return redirect()->back();
     }
 
     public function data()
@@ -23,8 +45,12 @@ class UserController extends Controller
             ->addColumn('aksi', function ($user) {
                 return '
                 <div class="btn-group">
-                    <button type="button" onclick="editForm(`'. route('user.update', $user->id) .'`)" class="btn btn-xs btn-primary btn-flat"><i class="fa fa-pencil"></i></button>
-                    <button type="button" onclick="deleteData(`'. route('user.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button type="button" onclick="editForm(`' .
+                    route('user.update', $user->id) .
+                    '`)" class="btn btn-xs btn-primary btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button type="button" onclick="deleteData(`' .
+                    route('user.destroy', $user->id) .
+                    '`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
             })
@@ -59,6 +85,17 @@ class UserController extends Controller
         $user->save();
 
         return response()->json('Data saved successfully', 200);
+    }
+
+    public function role(Request $request)
+    {
+        // dd($request->all());
+        $role = new Role();
+        $role->role_name = $request->role_name;
+        $role->role_status = 1;
+        $role->save();
+
+        return redirect()->back()->with('message', 'Role saved successfully');
     }
 
     /**
@@ -97,8 +134,9 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        if ($request->has('password') && $request->password != "") 
+        if ($request->has('password') && $request->password != '') {
             $user->password = bcrypt($request->password);
+        }
         $user->update();
 
         return response()->json('Data saved successfully', 200);
@@ -126,9 +164,9 @@ class UserController extends Controller
     public function updateProfil(Request $request)
     {
         $user = auth()->user();
-        
+
         $user->name = $request->name;
-        if ($request->has('password') && $request->password != "") {
+        if ($request->has('password') && $request->password != '') {
             if (Hash::check($request->old_password, $user->password)) {
                 if ($request->password == $request->password_confirmation) {
                     $user->password = bcrypt($request->password);

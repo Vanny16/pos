@@ -89,13 +89,20 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');
 
         Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
+        Route::get('/user/view-roles', [UserController::class, 'view_roles'])->name('user.view_roles');
+        Route::post('/user/update-role', [UserController::class, 'update_role'])->name('user.update_role');
+
+
+        Route::post('/user/role', [UserController::class, 'role'])->name('user.role');
+
+
         Route::resource('/user', UserController::class);
 
         Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
         Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
         Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
     });
- 
+
     Route::group(['middleware' => 'level:1,2'], function () {
         Route::get('/profil', [UserController::class, 'profil'])->name('user.profil');
         Route::post('/profil', [UserController::class, 'updateProfil'])->name('user.update_profil');

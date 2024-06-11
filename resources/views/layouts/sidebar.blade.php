@@ -77,10 +77,18 @@
                     <i class="fa fa-file-pdf-o"></i> <span>Income</span>
                 </a>
             </li>
+            @if(auth()->user()->role_id == 1)
+
             <li class="header">SYSTEM</li>
             <li>
                 <a href="{{ route('user.index') }}">
                     <i class="fa fa-users"></i> <span>User</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('user.view_roles') }}">
+                    <i class="fa fa-users"></i> <span>User Roles</span>
                 </a>
             </li>
             <li>
@@ -88,6 +96,9 @@
                     <i class="fa fa-cogs"></i> <span>Settings</span>
                 </a>
             </li>
+
+            @endif
+
             @else
             <li>
                 <a href="{{ route('transaksi.baru') }}">
@@ -102,5 +113,4 @@
             @endif
         </ul>
     </section>
-    <!-- /.sidebar -->
-</aside><!-- visit "codeastro" for more projects! -->
+</aside>
