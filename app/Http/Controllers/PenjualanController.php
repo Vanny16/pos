@@ -75,6 +75,7 @@ class PenjualanController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $penjualan = Penjualan::findOrFail($request->id_penjualan);
         $penjualan->id_member = $request->id_member;
         $penjualan->total_item = $request->total_item;
@@ -82,6 +83,8 @@ class PenjualanController extends Controller
         $penjualan->diskon = $request->diskon;
         $penjualan->bayar = $request->bayar;
         $penjualan->diterima = $request->diterima;
+        $penjualan->payment_type = $request->payment_type;
+        $penjualan->note = $request->note;
         $penjualan->update();
 
         $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();

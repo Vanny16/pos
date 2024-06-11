@@ -30,11 +30,11 @@
         @media print {
             @page {
                 margin: 0;
-                size: 75mm 
+                size: 75mm
     ';
     ?>
-    <?php 
-    $style .= 
+    <?php
+    $style .=
         ! empty($_COOKIE['innerHeight'])
             ? $_COOKIE['innerHeight'] .'mm; }'
             : '}';
@@ -68,7 +68,7 @@
     <div class="clear-both" style="clear: both;"></div>
     <p>No: {{ tambah_nol_didepan($penjualan->id_penjualan, 10) }}</p>
     <p class="text-center">===================================</p>
-    
+
     <br>
     <table width="100%" style="border: 0;">
         @foreach ($detail as $item)
@@ -85,10 +85,7 @@
     <p class="text-center">-----------------------------------</p>
 
     <table width="100%" style="border: 0;">
-        <tr>
-            <td>Total Price:</td>
-            <td class="text-right">{{ format_uang($penjualan->total_harga) }}</td>
-        </tr>
+
         <tr>
             <td>Total Item:</td>
             <td class="text-right">{{ format_uang($penjualan->total_item) }}</td>
@@ -109,6 +106,26 @@
             <td>Return:</td>
             <td class="text-right">{{ format_uang($penjualan->diterima - $penjualan->bayar) }}</td>
         </tr>
+
+        <tr>
+            <td>Total Sales(VAT Inclusive):</td>
+            <td class="text-right">{{ format_uang($penjualan->total_harga) }}</td>
+        </tr>
+        <tr>
+            <td>Less VAT:</td>
+            <td class="text-right">{{ number_format($penjualan->total_harga / 1.12, 2) }}</td>
+        </tr>
+
+        <tr>
+            <td>Amount net of VAT:</td>
+            <td class="text-right">{{ number_format($penjualan->total_harga / 1.02, 2) }}</td>
+        </tr>
+
+        <tr>
+            <td>Total Price:</td>
+            <td class="text-right">{{ format_uang($penjualan->total_harga) }}</td>
+        </tr>
+
     </table>
 
     <p class="text-center">===================================</p>
