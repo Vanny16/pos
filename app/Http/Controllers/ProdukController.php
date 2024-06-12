@@ -21,6 +21,34 @@ class ProdukController extends Controller
         return view('produk.index', compact('kategori'));
     }
 
+    public function save(Request $request)
+    {
+    // Validate the request data
+    $validatedData = $request->validate([
+        'nama_produk' => 'required|string|max:255',
+        'id_kategori' => 'required|integer',
+        'merk' => 'required|string|max:255',
+        'harga_jual' => 'required|numeric',
+        'diskon' => 'required|numeric',
+        'stok' => 'required|integer',
+    ]);
+
+    // Set 'harga_beli' to 0 if not present in the request
+    $validatedData['harga_beli'] = $request->filled('harga_beli') ? $request->input('harga_beli') : 0;
+
+    // Retrieve the latest product to generate the next product code
+    $latestProduct = Produk::latest()->first();
+    $nextId = $latestProduct ? $latestProduct->id_produk + 1 : 1;
+    $kode_produk = 'P' . str_pad($nextId, 6, '0', STR_PAD_LEFT);
+
+    // Add the generated product code to the validated data
+    $validatedData['kode_produk'] = $kode_produk;
+
+    // Create and save the new product record
+    $produk = Produk::create($validatedData);
+        return redirect()->back()->with('message', 'Role saved successfully');
+    }
+
     public function data()
     {
         $produk = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')

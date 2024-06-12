@@ -36,40 +36,55 @@
             </li>
             <li>
                 <a href="{{ route('member.index') }}">
-                    <i class="fa fa-id-card"></i> <span>Member</span>
+                    <i class="fa fa-id-card"></i> <span>Client</span>
                 </a>
             </li>
+
+            @if(auth()->user()->role_id == 1)
             <li>
                 <a href="{{ route('supplier.index') }}">
                     <i class="fa fa-truck"></i> <span>Supplier</span>
                 </a>
             </li>
+            @endif
+
             <li class="header">TRANSACTION</li>
             <li>
                 <a href="{{ route('pengeluaran.index') }}">
                     <i class="fa fa-money"></i> <span>Expenses</span>
                 </a>
             </li>
+            @if(auth()->user()->role_id == 1)
+
             <li>
                 <a href="{{ route('pembelian.index') }}">
                     <i class="fa fa-download"></i> <span>Purchase</span>
                 </a>
             </li>
+            @endif
+
+            @if(auth()->user()->role_id != 3)
             <li>
                 <a href="{{ route('penjualan.index') }}">
                     <i class="fa fa-dollar"></i> <span>Sales List</span>
                 </a>
             </li>
+            @endif
+
+            @if(auth()->user()->role_id != 3)
+
             <li>
                 <a href="{{ route('transaksi.baru') }}">
                     <i class="fa fa-cart-plus"></i> <span>New Transaction</span>
                 </a>
             </li>
-            <li>
+            @endif
+            {{-- <li>
                 <a href="{{ route('transaksi.index') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Active Transaction</span>
                 </a>
-            </li>
+            </li> --}}
+            @if(auth()->user()->role_id == 1)
 
             <li class="header">REPORT</li>
             <li>
@@ -77,8 +92,8 @@
                     <i class="fa fa-file-pdf-o"></i> <span>Income</span>
                 </a>
             </li>
+            @endif
             @if(auth()->user()->role_id == 1)
-
             <li class="header">SYSTEM</li>
             <li>
                 <a href="{{ route('user.index') }}">
@@ -105,6 +120,7 @@
                     <i class="fa fa-cart-plus"></i> <span>New Transaction</span>
                 </a>
             </li>
+
             <li>
                 <a href="{{ route('transaksi.index') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Active Transaction</span>

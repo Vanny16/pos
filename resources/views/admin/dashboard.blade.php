@@ -12,7 +12,7 @@
 @section('content')
 <!-- Small boxes (Stat box) -->
 <div class="row">
-    <div class="col-lg-3 col-xs-6">
+    <div @if(auth()->user()->role_id == 1) class="col-lg-3 col-xs-6" @else class="col-lg-4 col-xs-6" @endif>
         <!-- small box -->
         <div class="small-box bg-primary">
             <div class="inner">
@@ -27,7 +27,7 @@
         </div>
     </div>
     <!-- ./col --><!-- visit "codeastro" for more projects! -->
-    <div class="col-lg-3 col-xs-6">
+    <div @if(auth()->user()->role_id == 1) class="col-lg-3 col-xs-6" @else class="col-lg-4 col-xs-6" @endif>
         <!-- small box -->
         <div class="small-box bg-purple">
             <div class="inner">
@@ -42,7 +42,7 @@
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div @if(auth()->user()->role_id == 1) class="col-lg-3 col-xs-6" @else class="col-lg-4 col-xs-6" @endif>
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
@@ -57,6 +57,7 @@
         </div>
     </div>
     <!-- ./col -->
+  @if(auth()->user()->role_id == 1)
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-olive">
@@ -71,11 +72,15 @@
             <a href="{{ route('supplier.index') }}" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    @endif
     <!-- ./col -->
 </div>
 <!-- /.row -->
 
 <div class="row">
+
+  @if(auth()->user()->role_id != 3)
+
 <div class="col-lg-4 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-green">
@@ -88,7 +93,10 @@
             <a href="{{ route('penjualan.index') }}" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    @endif
     <!-- ./col -->
+
+  @if(auth()->user()->role_id != 3)
 
     <div class="col-lg-4 col-xs-6">
         <!-- small box -->
@@ -105,8 +113,10 @@
             <a href="{{ route('pengeluaran.index') }}" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    @endif
     <!-- ./col -->
     <!-- visit "codeastro" for more projects! -->
+    @if(auth()->user()->role_id == 1)
     <div class="col-lg-4 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-green">
@@ -122,6 +132,7 @@
             <a href="{{ route('pembelian.index') }}" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    @endif
     <!-- ./col -->
 
     <!-- visit "codeastro" for more projects! -->

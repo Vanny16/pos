@@ -15,7 +15,9 @@
         <div class="box">
             <div class="box-header with-border">
                 <div class="btn-group">
-                    <button onclick="addForm('{{ route('produk.store') }}')" class="btn btn-success  btn-flat"><i class="fa fa-plus-circle"></i> Add New Product</button>
+                    <button class="btn btn-success btn-flat" data-toggle="modal" data-target="#new_product"><i class="fa fa-plus-circle"></i> Add New Product</button>
+
+                    {{-- <button onclick="addForm('{{ route('produk.store') }}')" class="btn btn-success  btn-flat"><i class="fa fa-plus-circle"></i> Add New Product</button> --}}
                     <button onclick="deleteSelected('{{ route('produk.delete_selected') }}')" class="btn btn-danger  btn-flat"><i class="fa fa-trash"></i> Delete</button>
                     <button onclick="cetakBarcode('{{ route('produk.cetak_barcode') }}')" class="btn btn-warning  btn-flat"><i class="fa fa-barcode"></i> Print Barcode</button>
                 </div>
@@ -33,7 +35,9 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Brand</th>
+                            @if(auth()->user()->role_id == 1)
                             <th>Purchase Price</th>
+                            @endif
                             <th>Selling Price</th>
                             <th>Discount</th>
                             <th>Stock</th>
@@ -69,7 +73,9 @@
                 {data: 'nama_produk'},
                 {data: 'nama_kategori'},
                 {data: 'merk'},
+                @if(auth()->user()->role_id == 1)
                 {data: 'harga_beli'},
+                @endif
                 {data: 'harga_jual'},
                 {data: 'diskon'},
                 {data: 'stok'},

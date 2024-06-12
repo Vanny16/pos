@@ -15,7 +15,7 @@ List of Members
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm('{{ route('member.store') }}')" class="btn btn-success btn-flat"><i class="fa fa-plus-circle"></i> Add New Member</button>
-                <button onclick="cetakMember('{{ route('member.cetak_member') }}')" class="btn btn-primary btn-flat"><i class="fa fa-id-card"></i> Download Membership Card</button>
+                {{-- <button onclick="cetakMember('{{ route('member.cetak_member') }}')" class="btn btn-primary btn-flat"><i class="fa fa-id-card"></i> Download Membership Card</button> --}}
             </div>
             <div class="box-body table-responsive">
                 <form action="" method="post" class="form-member">

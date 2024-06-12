@@ -51,7 +51,7 @@
                             <div class="tampil-logo"></div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="path_kartu_member" class="col-lg-2 control-label">Membership Card</label>
                         <div class="col-lg-4">
                             <input type="file" name="path_kartu_member" class="form-control" id="path_kartu_member"
@@ -60,14 +60,14 @@
                             <br>
                             <div class="tampil-kartu-member"></div>
                         </div>
-                    </div>
-                    <div class="form-group row">
+                    </div> --}}
+                    {{-- <div class="form-group row">
                         <label for="diskon" class="col-lg-2 control-label">Discount</label>
                         <div class="col-lg-2">
                             <input type="number" name="diskon" class="form-control" id="diskon" required>
                             <span class="help-block with-errors"></span>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label for="tipe_nota" class="col-lg-2 control-label">Note Type</label>
                         <div class="col-lg-2">
@@ -128,7 +128,7 @@
                 $('[name=diskon]').val(response.diskon);
                 $('[name=tipe_nota]').val(response.tipe_nota);
                 $('title').text(response.nama_perusahaan + ' | Settings');
-                
+
                 let words = response.nama_perusahaan.split(' ');
                 let word  = '';
                 words.forEach(w => {
