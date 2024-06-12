@@ -101,11 +101,11 @@
                 </a>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="{{ route('user.view_roles') }}">
                     <i class="fa fa-users"></i> <span>User Roles</span>
                 </a>
-            </li>
+            </li> --}}
             <li>
                 <a href="{{ route("setting.index") }}">
                     <i class="fa fa-cogs"></i> <span>Settings</span>

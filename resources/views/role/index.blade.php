@@ -47,7 +47,7 @@
                                     </td>
                                     <td class="text-center"><div class="btn-group">
                                         <button type="button" class="btn btn-primary btn-flat update-btn" data-toggle="modal" data-target="#update-form-modal-{{ $role->role_id }}"><i class="fa fa-pencil"></i></button>
-                                        <button type="button" class="btn btn-danger btn-flat" style="margin-left: 5px;"><i class="fa fa-trash"></i></button>
+                                        {{-- <button type="button" class="btn btn-danger btn-flat" style="margin-left: 5px;"><i class="fa fa-trash"></i></button> --}}
                                     </div>
                                 </td>
 
