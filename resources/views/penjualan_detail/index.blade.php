@@ -148,10 +148,6 @@
                                             <option value="g_cash">G-cash</option>
                                             <option value="online_payment">Online Payment</option>
                                             <option value="Others">Others</option>
-
-
-
-
                                         </select>
                                     </div>
                                 </div>
@@ -239,7 +235,7 @@
                     loadForm($('#diskon').val());
                     setTimeout(() => {
                         $('#diterima').trigger('input');
-                    }, 300);
+                    }, 200);
                 });
             table2 = $('.table-produk').DataTable();
 
@@ -368,7 +364,6 @@
                     $('#bayar').val(response.bayar);
                     $('.tampil-bayar').text('Pay: ₱ ' + response.bayarrp);
                     $('.tampil-terbilang').text(response.terbilang);
-
                     $('#kembali').val('₱ ' + response.kembalirp);
                     if ($('#diterima').val() != 0) {
                         $('.tampil-bayar').text('Return: ₱ ' + response.kembalirp);
