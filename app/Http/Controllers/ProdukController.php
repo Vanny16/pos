@@ -56,6 +56,14 @@ class ProdukController extends Controller
             // ->orderBy('kode_produk', 'asc')
             ->get();
 
+            $grandTotalSellingPrice = $produk->sum(function($product) {
+        return $product->stok * $product->harga_jual;
+        });
+
+        $grandTotalPurchasePrice = $produk->sum(function($product) {
+        return $product->stok * $product->harga_beli;
+        });
+
         return datatables()
             ->of($produk)
             ->addIndexColumn()
@@ -70,8 +78,14 @@ class ProdukController extends Controller
             ->addColumn('harga_beli', function ($produk) {
                 return format_uang($produk->harga_beli);
             })
+            ->addColumn('purchase_total_value', function ($produk) {
+                return format_uang($produk->stok * $produk->harga_beli);
+            })
             ->addColumn('harga_jual', function ($produk) {
                 return format_uang($produk->harga_jual);
+            })
+            ->addColumn('selling_total_value', function ($produk) {
+                return format_uang($produk->stok * $produk->harga_jual);
             })
             ->addColumn('stok', function ($produk) {
                 return format_uang($produk->stok);
@@ -84,8 +98,11 @@ class ProdukController extends Controller
                 </div>
                 ';
             })
+            ->with('grandTotalSellingPrice', format_uang($grandTotalSellingPrice))
+            ->with('grandTotalPurchasePrice', format_uang($grandTotalPurchasePrice))
             ->rawColumns(['aksi', 'kode_produk', 'select_all'])
             ->make(true);
+
     }
 
     /**

@@ -35,16 +35,25 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Brand</th>
+                            <th>Stock</th>
+
                             @if(auth()->user()->role_id == 1)
                             <th>Purchase Price</th>
+                            <th>Purchase Total Price</th>
+
                             @endif
                             <th>Selling Price</th>
+                            <th>Selling Total Price</th>
                             <th>Discount</th>
-                            <th>Stock</th>
                             <th width="15%"><i class="fa fa-cog"></i></th>
                         </thead>
                     </table>
                 </form>
+            </div>
+            <div class="box-footer">
+                <h4>Grand Total Selling Price: <span id="grandTotalSellingPrice"></span></h4>
+                <h4>Grand Total Purchase Price: <span id="grandTotalPurchasePrice"></span></h4>
+
             </div>
         </div>
     </div>
@@ -73,14 +82,23 @@
                 {data: 'nama_produk'},
                 {data: 'nama_kategori'},
                 {data: 'merk'},
+                {data: 'stok'},
+
                 @if(auth()->user()->role_id == 1)
                 {data: 'harga_beli'},
+                {data: 'purchase_total_value'},
+
                 @endif
                 {data: 'harga_jual'},
+                {data: 'selling_total_value'},
+
                 {data: 'diskon'},
-                {data: 'stok'},
                 {data: 'aksi', searchable: false, sortable: false},
-            ]
+            ],
+            drawCallback: function(settings) {
+            $('#grandTotalSellingPrice').html('<strong>' + settings.json.grandTotalSellingPrice + '</strong>');
+            $('#grandTotalPurchasePrice').html('<strong>' + settings.json.grandTotalPurchasePrice + '</strong>');
+        }
         });
 
         $('#modal-form').validator().on('submit', function (e) {
@@ -186,4 +204,6 @@
         }
     }
 </script>
+
+
 @endpush
