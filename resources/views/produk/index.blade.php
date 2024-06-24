@@ -51,8 +51,8 @@
                 </form>
             </div>
             <div class="box-footer">
-                <h4>Grand Total Selling Price: <span id="grandTotalSellingPrice"></span></h4>
-                <h4>Grand Total Purchase Price: <span id="grandTotalPurchasePrice"></span></h4>
+                <h4>Grand Total: <span id="grandTotalSellingPrice"></span></h4>
+                <h4>Grand Total Original Price: <span id="grandTotalPurchasePrice"></span></h4>
 
             </div>
         </div>
@@ -82,8 +82,9 @@
                 {data: 'nama_produk'},
                 {data: 'nama_kategori'},
                 {data: 'merk'},
-                {data: 'stok'},
-
+                {data: 'stok', render: function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+            }},
                 @if(auth()->user()->role_id == 1)
                 {data: 'harga_beli'},
                 {data: 'purchase_total_value'},
